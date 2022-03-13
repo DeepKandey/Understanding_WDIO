@@ -1,10 +1,10 @@
 Feature: Web Interactions feature
 
-
-    Scenario Outline: Run first demo feature
+    @demo
+    Scenario Outline: Demo Web Interactions
         Given A web page is opened
         When Perform web interactions
 
         Examples:
             | TestID    |
-            | WEV_TC002 |
+            | WEB_TC002 |

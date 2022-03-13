@@ -27,3 +27,34 @@ Then(/^URL should match (.*)$/, async function (expectedURL) {
   let url = await browser.getUrl();
   chai.expect(url).to.equal(expectedURL);
 });
+
+/**Web Interactions */
+
+Given(/^A web page is opened$/, async function () {
+  await browser.url("/inputs");
+  await browser.setTimeout({ implicit: 10000, pageLoad: 10000 });
+  await browser.maximizeWindow();
+});
+
+Then(/^Perform web interactions$/, async function () {
+  let num = 12345;
+  let strNum = num.toString();
+
+  let ele = await $(`[type=number]`);
+  //  await ele.click();
+  //  await ele.moveToElement();
+  //await ele.scrollIntoView();
+
+  await ele.setValue("12345"); // clear before entering
+  // await ele.addValue("WDIO");  // append
+
+  // ele.click();
+  // enter slowly each character of the string
+  for (let index = 0; index < strNum.length; index++) {
+    let charStr = strNum.charAt(index);
+    await browser.pause(1000);
+    await browser.keys(charStr);
+  }
+
+  await browser.pause(3000);
+});
