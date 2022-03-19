@@ -178,5 +178,44 @@ Then(/^Perform web interactions$/, async function () {
   await browser.url("https://www.amazon.com.au/");
   await $(`div#navFooter`).scrollIntoView();
 
-  await browser.debug();
+  // handling web tables
+  await browser.url("https://the-internet.herokuapp.com/tables");
+
+  let rowCount = await $$(`//table[@id="table1"]/tbody/tr`).length;
+  console.log(`>> Number of rows: ${rowCount}`);
+  chai.expect(rowCount).to.equal(4);
+
+  let columnCount = await $$(`//table[@id="table1"]/thead/tr/th`).length;
+  console.log(`>> Number of columns: ${columnCount}`);
+  chai.expect(columnCount).to.equal(6);
+
+  let personObjArr = [];
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+    let personObj = {
+      lastName: "",
+      firstName: "",
+      email: "",
+      due: "",
+      website: "",
+      action: "",
+    };
+
+    for (let colIndex = 0; colIndex < columnCount; colIndex++) {
+      let cellValue = await $(
+        `//table[@id="table1"]/tbody/tr[${rowIndex + 1}]/td[${colIndex + 1}]`
+      ).getText();
+      // console.log(`>> Cell Value: ${cellValue}`);
+      if (colIndex === 0) personObj.lastName = cellValue;
+      if (colIndex === 1) personObj.firstName = cellValue;
+      if (colIndex === 2) personObj.email = cellValue;
+      if (colIndex === 3) personObj.due = cellValue;
+      if (colIndex === 4) personObj.website = cellValue;
+      if (colIndex === 5) personObj.action = cellValue;
+    }
+    personObjArr.push(personObj);
+  }
+  console.table(`Whole table: ${JSON.stringify(personObjArr)}`);
+
+  
+  //await browser.debug();
 });
