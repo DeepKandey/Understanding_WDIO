@@ -4,8 +4,9 @@
     "description": "wdio end2e tests",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "wdio": "wdio run test/wdio.conf.ts"
+        "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'",
+        "smoke": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@smoke'",
+        "wdio": "wdio run wdio.conf.ts"
     },
     "repository": {
         "type": "git",

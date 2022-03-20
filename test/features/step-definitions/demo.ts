@@ -24,6 +24,19 @@ Then(/^Click on first search result$/, async function () {
 
 Then(/^URL should match (.*)$/, async function (expectedURL) {
   console.log(`>> expectedURL: ${expectedURL}`);
+  await browser.waitUntil(
+    async function () {
+      return (
+        (await browser.getTitle()) ===
+        "WebdriverIO · Next-gen browser and mobile automation test framework for Node.js | WebdriverIO"
+      );
+    },
+    {
+      timeout: 20000,
+      interval: 500,
+      timeoutMsg: `Failed loading WDIO title: ${expectedURL}`,
+    }
+  );
   let url = await browser.getUrl();
   chai.expect(url).to.equal(expectedURL);
 });
@@ -216,6 +229,24 @@ Then(/^Perform web interactions$/, async function () {
   }
   console.table(`Whole table: ${JSON.stringify(personObjArr)}`);
 
-  
+  // scrolling up
+  await browser.url("https://www.amazon.com.au/");
+  await browser.execute(() => {
+    window.scrollBy(0, window.innerHeight);
+  });
+  await browser.execute(() => {
+    window.scrollBy(0, -window.innerHeight);
+  });
+
+  // scrollTo
+  await browser.execute(() => {
+    window.scrollBy(0, document.body.scrollHeight);
+  });
+
+  // scroll up
+  await browser.execute(() => {
+    window.scrollBy(0, document.body.scrollTop);
+  });
+
   //await browser.debug();
 });
