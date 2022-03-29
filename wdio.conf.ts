@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+let headless = process.env.HEADLESS;
 export const config: WebdriverIO.Config = {
   //
   // ====================
@@ -82,7 +85,18 @@ export const config: WebdriverIO.Config = {
       maxInstances: 5,
       //
       browserName: "chrome",
-      "goog:chromeOptions": { args: ["disable-web-security"] },
+      "goog:chromeOptions": {
+        args:
+          headless.toUpperCase() === "Y"
+            ? [
+                "--disable-web-security",
+                "--headless",
+                "--disable-dev-shm-usage",
+                "--no-sandbox",
+                "--window-size=1920,1080",
+              ]
+            : [],
+      },
       acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
       // it is possible to configure which logTypes to include/exclude.

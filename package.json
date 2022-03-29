@@ -4,8 +4,8 @@
     "description": "wdio end2e tests",
     "main": "index.js",
     "scripts": {
-        "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'",
-        "smoke": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@smoke'",
+        "demo": "set HEADLESS=N&&npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'",
+        "smoke": "set HEADLESS=Y&&npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@smoke'",
         "wdio": "wdio run wdio.conf.ts"
     },
     "repository": {
@@ -33,6 +33,7 @@
         "@wdio/spec-reporter": "^7.16.14",
         "chai": "^4.3.6",
         "chromedriver": "^98.0.1",
+        "dotenv": "^16.0.0",
         "ts-node": "^10.5.0",
         "typescript": "^4.5.5",
         "wdio-chromedriver-service": "^7.2.8"
