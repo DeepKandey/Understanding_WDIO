@@ -4,6 +4,7 @@
   "description": "wdio end2e tests",
   "main": "index.js",
   "scripts": {
+    "test:debug": "set DEBUG=Y&& set HEADLESS=N&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@debug'",
     "test:demo": "set HEADLESS=N&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
     "test:smoke": "set HEADLESS=Y&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
     "uat:demo": "set HEADLESS=N&&npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@demo'",
