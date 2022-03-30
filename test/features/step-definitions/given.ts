@@ -1,8 +1,13 @@
 import { Given } from "@cucumber/cucumber";
 import chai from "chai";
 
-Given(/^Login to inventory web app$/, async function () {
+Given(/^Login to inventory web app$/, async function (dataTable) {
   console.log(`Test username: ${process.env.TEST_STD_USERNAME}`);
+  // Getting values from data table
+  let dt = dataTable.hashes();
+  console.log(`>> The type of dt: ${typeof dt}`);
+  console.log(`>> The type of dt constructor: ${dt.constructor}`);
+  console.log(`>> The value of dt: ${JSON.stringify(dt)}`);
   /**
    *  1. Launch browser
    */
@@ -15,7 +20,8 @@ Given(/^Login to inventory web app$/, async function () {
   /**
    * 2. Login to inventory app
    */
-  await $(`#user-name`).setValue(process.env.TEST_STD_USERNAME);
+  await $(`#user-name`).setValue(dt[0].Username);
+  //await $(`#user-name`).setValue(process.env.TEST_STD_USERNAME);
   await $(`#password`).setValue(process.env.TEST_STD_PASSWORD);
   await $(`#login-button`).click();
 
