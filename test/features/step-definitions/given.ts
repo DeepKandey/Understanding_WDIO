@@ -2,11 +2,12 @@ import { Given } from "@cucumber/cucumber";
 import chai from "chai";
 
 Given(/^Login to inventory web app$/, async function () {
-  console.log(`Test username: ${process.env.TEST_USERNAME}`);
+  console.log(`Test username: ${process.env.TEST_STD_USERNAME}`);
   /**
    *  1. Launch browser
    */
-  await browser.url(browser.config.saucedemoURL);
+  // @ts-ignore
+  await browser.url(browser.config.sauceDemoURL);
   console.log(`>>Test config values: ${JSON.stringify(browser.config)}`);
   await browser.setTimeout({ implicit: 15000, pageLoad: 10000 });
   await browser.maximizeWindow();
