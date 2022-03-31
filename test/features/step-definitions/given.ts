@@ -36,4 +36,5 @@ Given(/^Login to inventory web app$/, async function (dataTable) {
   // await browser.back();
   // await browser.pause(2000);
   // await browser.forward();
+  this.appid = "ABC123";
 });

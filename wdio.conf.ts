@@ -270,8 +270,11 @@ export const config: WebdriverIO.Config = {
    * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
    * @param {Object}                 context  Cucumber World object
    */
-  // beforeScenario: function (world, context) {
-  // },
+  beforeScenario: function (world, context) {
+    console.log(`>> World: ${JSON.stringify(world)}`);
+    let arr = world.pickle.name.split(/:/);
+    if (arr.length > 0) browser.config.testId = arr[0];
+  },
   /**
    *
    * Runs before a Cucumber Step.

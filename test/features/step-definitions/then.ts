@@ -2,6 +2,7 @@ import { Then } from "@cucumber/cucumber";
 import chai from "chai";
 
 Then(/^Inventory page should list (.*)$/, async function (noOfProducts) {
+  console.log(`>> The app id: ${this.appid}`);
   if (!noOfProducts) {
     throw Error(`Invalid number provided: ${noOfProducts}`);
   }

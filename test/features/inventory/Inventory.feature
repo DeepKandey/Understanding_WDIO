@@ -1,7 +1,7 @@
 Feature: Inventory feature
 
     @demo @debug
-    Scenario Outline: Demo Inventory
+    Scenario Outline: <TestID>: Demo Inventory
         Given Login to inventory web app
             | UserType | Username                |
             | StdUser  | standard_user           |
