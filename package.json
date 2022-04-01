@@ -4,7 +4,7 @@
   "description": "wdio end2e tests",
   "main": "index.js",
   "scripts": {
-    "test:debug": "set DEBUG=Y&& set HEADLESS=N&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@debug'",
+    "test:debug": "export DEBUG=Y && export HEADLESS=N&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@debug' > output.txt",
     "test:demo": "export HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
     "test:smoke": "set HEADLESS=Y&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
     "uat:demo": "set HEADLESS=N&&npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@demo'",
@@ -39,6 +39,7 @@
     "dotenv": "^16.0.0",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5",
-    "wdio-chromedriver-service": "^7.3.2"
+    "wdio-chromedriver-service": "^7.3.2",
+    "winston": "^3.6.0"
   }
 }

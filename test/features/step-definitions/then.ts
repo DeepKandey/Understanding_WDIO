@@ -1,5 +1,6 @@
 import { Then } from "@cucumber/cucumber";
 import chai from "chai";
+import logger from "../../helpers/logger";
 
 Then(/^Inventory page should list (.*)$/, async function (noOfProducts) {
   console.log(`Starting Test Id: ${this.testId}`);
@@ -18,6 +19,7 @@ Then(/^Inventory page should list (.*)$/, async function (noOfProducts) {
  * 3. Assert if any value is <=0
  */
 Then(/^Validate all products have valid price$/, async function () {
+  logger.info(`${this.testId}: Checking the price...`)
   let eleArr = await $$(`.inventory_item_price`);
   let priceStrArr = [];
   for (let i = 0; i < eleArr.length; i++) {

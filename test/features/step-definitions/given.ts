@@ -1,7 +1,9 @@
 import { Given } from "@cucumber/cucumber";
 import chai from "chai";
+import logger from "../../helpers/logger";
 
 Given(/^Login to inventory web app$/, async function (dataTable) {
+  logger.info(`${this.testId}: Started to login with Sauce demo app`);
   console.log(`Test username: ${process.env.TEST_STD_USERNAME}`);
   // get the testId
   console.log(`Given step Test Id: ${this.testId}`);
