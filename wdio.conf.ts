@@ -1,4 +1,8 @@
+// @ts-nocheck
 import dotenv from "dotenv";
+import allure from "@wdio/allure-reporter";
+import fs from "fs";
+
 dotenv.config();
 let headless = process.env.HEADLESS;
 let debug = process.env.DEBUG;
@@ -226,8 +230,11 @@ export const config: WebdriverIO.Config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  onPrepare: function (config, capabilities) {
+    if (process.env.RUNNER === "LOCAL" && fs.existsSync("./allure-results")) {
+      fs.rmSync("./allure-results"), { recursive: true };
+    }
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -336,8 +343,10 @@ export const config: WebdriverIO.Config = {
    * @param {String}                   uri      path to feature file
    * @param {GherkinDocument.IFeature} feature  Cucumber feature object
    */
-  // afterFeature: function (uri, feature) {
-  // },
+  afterFeature: function (uri, feature) {
+    // add more environment details
+    allure.addEnvironment("Environment: ", browser.config.environment);
+  },
 
   /**
    * Runs after a WebdriverIO command gets executed
