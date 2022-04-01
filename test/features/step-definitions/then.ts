@@ -5,12 +5,18 @@ import logger from "../../helpers/logger";
 Then(/^Inventory page should list (.*)$/, async function (noOfProducts) {
   console.log(`Starting Test Id: ${this.testId}`);
   console.log(`>> The app id: ${this.appid}`);
-  if (!noOfProducts) {
-    throw Error(`Invalid number provided: ${noOfProducts}`);
-  }
+  try {
+    if (!noOfProducts) {
+      throw Error(`Invalid number provided: ${noOfProducts}`);
+    }
 
-  let eleArr = await $$(`.inventory_item_name`);
-  chai.expect(eleArr.length).to.equal(parseInt(noOfProducts));
+    let eleArr = await $$(`.inventory_item_name`);
+    chai.expect(eleArr.length).to.equal(parseInt(noOfProducts));
+  } catch (e) {
+    console.log(`>> The type of error: ${typeof e}`);
+    console.log(`>> The name of the property: ${e.name}`);
+    console.log(`>> The name of the message: ${e.message}`);
+  }
 });
 
 /**Steps:
