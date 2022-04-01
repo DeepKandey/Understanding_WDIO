@@ -232,7 +232,7 @@ export const config: WebdriverIO.Config = {
    */
   onPrepare: function (config, capabilities) {
     if (process.env.RUNNER === "LOCAL" && fs.existsSync("./allure-results")) {
-      fs.rmSync("./allure-results"), { recursive: true };
+      fs.rmdirSync("./allure-results", { recursive: true });
     }
   },
   /**
