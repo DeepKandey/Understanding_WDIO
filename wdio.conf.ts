@@ -273,7 +273,13 @@ export const config: WebdriverIO.Config = {
   beforeScenario: function (world, context) {
     console.log(`>> World: ${JSON.stringify(world)}`);
     let arr = world.pickle.name.split(/:/);
+    // @ts-ignore
     if (arr.length > 0) browser.config.testId = arr[0];
+    // @ts-ignore
+    if (!browser.config.testId)
+      throw Error(
+        `Error getting testid for current scenario: ${world.pickle.name}`
+      );
   },
   /**
    *
@@ -282,8 +288,9 @@ export const config: WebdriverIO.Config = {
    * @param {IPickle}            scenario scenario pickle
    * @param {Object}             context  Cucumber World object
    */
-  // beforeStep: function (step, scenario, context) {
-  // },
+  beforeStep: function (step, scenario, context) {
+    console.log(`>> before step context: ${JSON.stringify(context)}`);
+  },
   /**
    *
    * Runs after a Cucumber Step.
@@ -295,8 +302,12 @@ export const config: WebdriverIO.Config = {
    * @param {number}             result.duration  duration of scenario in milliseconds
    * @param {Object}             context          Cucumber World object
    */
-  // afterStep: function (step, scenario, result, context) {
-  // },
+  afterStep: async function (step, scenario, result, context) {
+    // Take screenshot if Failed
+    if (!result.passed) {
+      await browser.takeScreenshot();
+    }
+  },
   /**
    *
    * Runs after a Cucumber Scenario.

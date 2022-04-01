@@ -3,6 +3,8 @@ import chai from "chai";
 
 Given(/^Login to inventory web app$/, async function (dataTable) {
   console.log(`Test username: ${process.env.TEST_STD_USERNAME}`);
+  // get the testId
+  console.log(`Given step Test Id: ${this.testId}`);
   // Getting values from data table
   let dt = dataTable.hashes();
   console.log(`>> The type of dt: ${typeof dt}`);

@@ -1,4 +1,6 @@
 # Understanding_WDIO
 Concepts for WebDriverIO
 
-- Commmand to execute scripts - npx wdio wdio.conf.ts
+- Commands: -
+- Execute scripts - npx wdio wdio.conf.ts
+- Install chromedriver as dev dependencies - npm install chromedriver --save-dev  
