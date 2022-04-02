@@ -1,9 +1,13 @@
 import { Given } from "@cucumber/cucumber";
 import chai from "chai";
 import logger from "../../helpers/logger";
+import reporter from "../../helpers/reporter";
+import allure from "@wdio/allure-reporter";
 
 Given(/^Login to inventory web app$/, async function (dataTable) {
-  logger.info(`${this.testId}: Started to login with Sauce demo app`);
+  reporter.addStep(this.testId, "info", "Login with Sauce demo app");
+  //  logger.info(`${this.testId}: Started to login with Sauce demo app`);
+  //allure.addStep(`${this.testId}: Started to login with Sauce demo app`);
   console.log(`Test username: ${process.env.TEST_STD_USERNAME}`);
   // get the testId
   console.log(`Given step Test Id: ${this.testId}`);
@@ -41,4 +45,6 @@ Given(/^Login to inventory web app$/, async function (dataTable) {
   // await browser.pause(2000);
   // await browser.forward();
   this.appid = "ABC123";
+  reporter.addStep(this.testId, "debug", "Login is successful");
 });
+  
