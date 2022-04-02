@@ -8,6 +8,8 @@
       "expect-webdriverio"
     ],
     "target": "ES2021",
-    "module": "commonjs"
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "suppressExcessPropertyErrors": true
   }
 }

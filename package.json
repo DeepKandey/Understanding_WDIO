@@ -4,8 +4,8 @@
   "description": "wdio end2e tests",
   "main": "index.js",
   "scripts": {
-    "test:debug": "export DEBUG=Y && export HEADLESS=N&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@debug' > output.txt",
-    "test:demo": "export HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
+    "test:debug": "set DEBUG=Y&& set HEADLESS=N&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@debug' > output.txt",
+    "test:demo": "set HEADLESS=N&& npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
     "test:smoke": "set HEADLESS=Y&&npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
     "uat:demo": "set HEADLESS=N&&npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@demo'",
     "uat:smoke": "set HEADLESS=Y&&npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@smoke'",

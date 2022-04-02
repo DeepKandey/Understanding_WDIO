@@ -288,7 +288,7 @@ export const config: WebdriverIO.Config = {
    * @param {Object}                 context  Cucumber World object
    */
   beforeScenario: function (world, context) {
-    console.log(`>> World: ${JSON.stringify(world)}`);
+    //  console.log(`>> World: ${JSON.stringify(world)}`);
     let arr = world.pickle.name.split(/:/);
     // @ts-ignore
     if (arr.length > 0) browser.config.testId = arr[0];
@@ -306,7 +306,7 @@ export const config: WebdriverIO.Config = {
    * @param {Object}             context  Cucumber World object
    */
   beforeStep: function (step, scenario, context) {
-    console.log(`>> before step context: ${JSON.stringify(context)}`);
+   // console.log(`>> before step context: ${JSON.stringify(context)}`);
   },
   /**
    *

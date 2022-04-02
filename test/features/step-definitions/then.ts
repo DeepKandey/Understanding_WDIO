@@ -1,11 +1,11 @@
 import { Then } from "@cucumber/cucumber";
 import chai from "chai";
-import logger from "../../helpers/logger";
-import reporter from "../../helpers/reporter";
+import logger from "../../helper/logger";
+import reporter from "../../helper/reporter";
 
 Then(/^Inventory page should list (.*)$/, async function (noOfProducts) {
   console.log(`Starting Test Id: ${this.testId}`);
-  console.log(`>> The app id: ${this.appid}`);
+  // console.log(`>> The app id: ${this.appid}`);
   try {
     if (!noOfProducts) {
       throw Error(`Invalid number provided: ${noOfProducts}`);
