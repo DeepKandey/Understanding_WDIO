@@ -1,15 +1,12 @@
-Feature: Inventory feature
+Feature: Customer search
 
     @demo @debug
-    Scenario Outline: <TestID>: Demo Inventory
-        Given Login to inventory web app
-            | UserType | Username                |
-            | StdUser  | standard_user           |
-            | ProbUser | problem_user            |
-            | PerfUser | performance_glitch_user |
-        Then Inventory page should list <NumberOfProducts>
-        Then Validate all products have valid price
+    Scenario Outline: <TestID>: Search external customers
+        Given Get list of users from reqres.in
+        When As Admin user login to nopcommerce site
+        When Search users in customer list
+        Then Verify if all users exists in customers list
 
         Examples:
-            | TestID     | NumberOfProducts |
-            | INTV_TC001 | 6                |
+            | TestID    |
+            | E2E_TC001 |
