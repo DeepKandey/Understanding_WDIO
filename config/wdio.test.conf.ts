@@ -5,5 +5,5 @@ export const config = Object.assign(baseConfig, {
   environment: "TEST",
   sauceDemoURL: "https://www.saucedemo.com",
   reqresBaseURL: "https://reqres.in",
-  nopCommerceBASEUEL: "https://admin-demo.nopcommerce.com/login",
+  nopCommerceBASEUEL: "https://admin-demo.nopcommerce.com",
 });

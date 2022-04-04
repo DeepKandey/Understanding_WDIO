@@ -2,6 +2,8 @@ import { Then } from "@cucumber/cucumber";
 import chai from "chai";
 import logger from "../../helper/logger";
 import reporter from "../../helper/reporter";
+import fs from "fs";
+import nopCommerceCustListPage from "../../page-objects/nopcommerce.custlist.page";
 
 Then(/^Inventory page should list (.*)$/, async function (noOfProducts) {
   console.log(`Starting Test Id: ${this.testId}`);
@@ -53,6 +55,49 @@ Then(/^Validate all products have valid price$/, async function () {
   chai.expect(invalidPriceArr.length).to.equal(0);
 });
 
-Then(/^Verify if all users exists in customers list$/, async function (){
+Then(/^Verify if all users exists in customers list$/, async function () {
+  try {
+    // @ts-ignore
+    await browser.url(
+      `${browser.config.nopCommerceBASEUEL}/Admin/Customer/List`
+    );
+    reporter.addStep(
+      this.testId,
+      "info",
+      `Navigated to customer list screen...`
+    );
 
-})
+    let fileName = `${process.cwd()}/data/api-rest/reqresAPIUsers.json`;
+    let data = fs.readFileSync(fileName, "utf8");
+    let dataObj = JSON.parse(data);
+    //  console.log(`API data: ${JSON.stringify(dataObj)}`);
+
+    let numOfObjects = dataObj.data.length;
+    let arr = [];
+    for (let i = 0; i < numOfObjects; i++) {
+      let obj = {};
+      let firstname = dataObj.data[i].first_name;
+      let lastname = dataObj.data[i].last_name;
+      let custNotFound = await nopCommerceCustListPage.searchNameAndConfirm(
+        this.testId,
+        firstname,
+        lastname
+      );
+
+      if (custNotFound) {
+        obj["firstname"] = firstname;
+        obj["lasttname"] = lastname;
+        arr.push(obj);
+      }
+    }
+
+    if (arr.length > 1) {
+      let data = JSON.stringify(arr, undefined, 4);
+      let filepath = `${process.cwd()}/results/custNotFoundList.json`;
+      fs.writeFileSync(filepath, data);
+    }
+  } catch (err) {
+    err.message = `${this.testId}: Failed at checking user in nopcommerce site, ${err.message}`;
+    throw err;
+  }
+});
