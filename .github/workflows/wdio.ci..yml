@@ -33,7 +33,7 @@ jobs:
      - name: Use Node.js
        uses: actions/setup-node@v1
        with:
-        node-versions: 14.x
+         node-versions: 14.x
     - name: Install dependencies
       run: npm install
     - name: Running smoke tests
