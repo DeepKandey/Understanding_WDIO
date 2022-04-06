@@ -20,7 +20,7 @@ jobs:
     env: 
       RUNNER: ${{secrets.RUNNER}}
       LOG_LEVEL: ${{secrets.LOG_LEVEL}}
-      TEST_NOP_ADMIN_USERNAME: ${{secrets.TEST_NOP_ADMIN_USER}}
+      TEST_NOP_ADMIN_USERNAME: ${{secrets.TEST_NOP_ADMIN_USERNAME}}
       TEST_NOP_ADMIN_PASSWORD: ${{secrets.TEST_NOP_ADMIN_PASSWORD}}
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
